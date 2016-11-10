@@ -3,27 +3,41 @@
 <body>
 
 
-<button onclick="getDefinition()">Search</button>
-<p id="myDiv"></p>
+ 
+<div style='background-color: blue;'><h1 style='color: white'> Word Dictionary! </h1> </div>
+<p>Please enter a word below</p>
+<form action="request.php">
+  Word: <input type="text" name="q" id="word"><br>
+  <input type="submit" value="Search" onclick="getDefinition(); return false;">
+</form>
+</br>
+<div id="result"> RESULTS  </div>
+
 
 <script type="text/javascript">
 function getDefinition() {
+    // word.preventDefault();
+    var word = document.getElementById('word').value;
+    console.log(word);
     var xmlhttp = new XMLHttpRequest();
 
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
            if (xmlhttp.status == 200) {
-               alert(xmlhttp.responseText);
+                document.getElementById("result").innerHTML = this.responseText;
+              
            }
          
            else {
                alert('Oops!');
            }
         }
+              
     };
-
-    xmlhttp.open("GET", "request.php?q=definition", true);
+    
+    xmlhttp.open("GET", "request.php?q=" + word, true);
     xmlhttp.send();
+
 }
 </script>
 
