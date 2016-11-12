@@ -8,16 +8,22 @@
 <p>Please enter a word below</p>
 <form action="request.php">
   Word: <input type="text" name="q" id="word"><br>
-  <input type="submit" value="Search" onclick="getDefinition(); return false;">
+  <input type="submit" value="Search" onclick="getDefinition(false); return false;">
 </form>
 </br>
 <div id="result"> RESULTS  </div>
-
+<button id="all"  onclick="getDefinition(true); return false;">Get all defintions</button>
 
 <script type="text/javascript">
-function getDefinition() {
+function getDefinition(bool) {
     // word.preventDefault();
+    if (bool){
+        var word = "&all=true";
+    }
+    else{
     var word = document.getElementById('word').value;
+    }
+   
     console.log(word);
     var xmlhttp = new XMLHttpRequest();
 
